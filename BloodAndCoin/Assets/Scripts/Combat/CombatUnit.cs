@@ -21,10 +21,15 @@ namespace BloodAndCoin.Combat
         public float TieBreakRoll { get; }
 
         public int CurrentHp { get; private set; }
+        public int CurrentArmor { get; private set; }
         public int CurrentActionPoints { get; private set; }
         public HexCoord Position { get; set; }
 
         public bool IsAlive => CurrentHp > 0;
+
+        // Melee is always range 1; a ranged unit's actual reach/cost come from its stats.
+        public int AttackRange => Stats.isRanged ? Stats.rangedRange : 1;
+        public int AttackActionPointCost => Stats.isRanged ? Stats.rangedActionPointCost : Stats.meleeActionPointCost;
 
         public CombatUnit(string name, UnitStatsDefinition stats, Team team, float tieBreakRoll)
         {
@@ -33,6 +38,7 @@ namespace BloodAndCoin.Combat
             Team = team;
             TieBreakRoll = tieBreakRoll;
             CurrentHp = stats.maxHp;
+            CurrentArmor = stats.maxArmor;
             CurrentActionPoints = stats.actionPoints;
         }
 
@@ -47,12 +53,17 @@ namespace BloodAndCoin.Combat
             return true;
         }
 
+        // Armor absorbs point-for-point before HP takes any overflow.
         public void ApplyDamage(int amount)
         {
             if (amount < 0)
                 throw new ArgumentOutOfRangeException(nameof(amount));
 
-            CurrentHp = Math.Max(0, CurrentHp - amount);
+            int absorbedByArmor = Math.Min(CurrentArmor, amount);
+            CurrentArmor -= absorbedByArmor;
+
+            int remaining = amount - absorbedByArmor;
+            CurrentHp = Math.Max(0, CurrentHp - remaining);
         }
     }
 }

@@ -17,6 +17,6 @@ MonoBehaviour:
   initiative: 10
   meleeAccuracy: 60
   meleeDefense: 20
-  meleeDamage: 5
-  actionPoints: 4
+  meleeDamage: 15
+  actionPoints: 8
   attackActionPointCost: 2

@@ -10,13 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 88b8b5b066d6651479c494183231c45f, type: 3}
-  m_Name: EnemyUnitStats
+  m_Name: PlayerArcherStats
   m_EditorClassIdentifier: BloodAndCoin.Combat::BloodAndCoin.Combat.UnitStatsDefinition
   unitName: Unit
   maxHp: 20
   initiative: 10
   meleeAccuracy: 60
   meleeDefense: 20
-  meleeDamage: 10
-  actionPoints: 4
-  attackActionPointCost: 2
+  meleeDamage: 15
+  rangedDefense: 10
+  actionPoints: 8
+  meleeActionPointCost: 2
+  isRanged: 0
+  rangedAccuracy: 81
+  rangedDamage: 12
+  rangedRange: 15
+  rangedActionPointCost: 2
