@@ -1,2 +1,4 @@
 ﻿<Solution>
+  <Project Path="BloodAndCoin.Combat.csproj" />
+  <Project Path="BloodAndCoin.Combat.Tests.csproj" />
 </Solution>
